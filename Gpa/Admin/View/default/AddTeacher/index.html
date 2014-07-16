@@ -1,0 +1,40 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"><h1>添加老师</h1></div>
+    <div class="col-md-1"></div>
+    <form action="<?php echo C('HOME_PAGE'); ?>Admin/AddTeacher/addTeacher" method="post">
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">用户名</div>
+            <div class="col-md-9"><input type="text" name="tc_user"></div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">姓名</div>
+            <div class="col-md-9"><input type="text" name="tc_name"></div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">是否管理员</div>
+            <div class="col-md-9">
+                <select name="administrator">
+                    <option value="0">不是</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">学院</div>
+            <div class="col-md-9">
+                <select name="a_id">
+                    <volist name="a_list" id="a">
+                        <option value="{$a.a_id}">{$a.a_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12" style="text-align: center;">
+            <input type="submit" class="btn btn-success" style="width: auto;">
+        </div>
+    </form>
+</div>
+</body>
+</html>

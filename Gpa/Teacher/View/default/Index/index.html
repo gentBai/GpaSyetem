@@ -1,0 +1,78 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <volist name="msg_list" id="msg_list">
+            <div class="btn btn-lg btn-info msg_list" id="{$msg_list.msg_id}">
+                <div class="col-md-12">{$msg_list.cr_name}</div>
+                <div class="col-md-12" style="float: right;">{$msg_list.s_name}</div>
+            </div>
+        </volist>
+    </div>
+    <div class="col-sm-8 col-sm-offset-3 main">
+        <div class="alert alert-success">
+            <div class="col-xs-6 col-md-3">课程</div>
+            <div class="col-xs-6 col-md-3">人数</div>
+            <div class="col-xs-6 col-md-3">时间</div>
+        </div>
+        <volist name="c_list" id="c_list">
+            <div class="alert alert-success class-edit" id="{$c_list.c_id}">
+                <div class="col-xs-6 col-md-3">{$c_list.cr_name}</div>
+                <div class="col-xs-6 col-md-3">{$c_list.c_num}</div>
+                <div class="col-xs-6 col-md-3">{$c_list.time}</div>
+                <div class="col-xs-6 col-md-3 options hidden" style="height: 16px;">
+                    <div class="col-md-4 record" value="{$c_list.c_id}">
+                        <a href="<?php echo C('HOME_PAGE') ?>teacher/record/{$c_list.c_id}">
+                            <img height="16px" src="<?php echo C('IMG_URL'); ?>score.png">
+                            <div class="tag hidden">登记成绩</div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 signup" value="{$c_list.c_id}">
+                        <a href="<?php echo C('HOME_PAGE') ?>teacher/signup/{$c_list.c_id}" title="点名签到">
+                            <img height="16px" src="<?php echo C('IMG_URL'); ?>signup.png">
+                            <div class="tag hidden">点名签到</div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 edit" value="{$c_list.c_id}">
+                        <a href="<?php echo C('HOME_PAGE') ?>teacher/edit/{$c_list.c_id}" title="修改成绩比重">
+                            <img height="16px" src="<?php echo C('IMG_URL'); ?>edit.png">
+                            <div class="tag hidden">修改成绩比重</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </volist>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".class-edit").hover(function() {
+        $(this).children('.options').removeClass('hidden');
+    }, function() {
+        $(this).children('.options').addClass('hidden');
+    });
+    $('.record').hover(function() {
+        $(this).children().children('.tag').removeClass('hidden');
+    }, function() {
+        $(this).children().children('.tag').addClass('hidden');
+    });
+    $('.signup').hover(function() {
+        $(this).children().children('.tag').removeClass('hidden');
+    }, function() {
+        $(this).children().children('.tag').addClass('hidden');
+    });
+    $('.edit').hover(function() {
+        $(this).children().children('.tag').removeClass('hidden');
+    }, function() {
+        $(this).children().children('.tag').addClass('hidden');
+    });
+    $('.msg_list').click(function() {
+        var id = $(this).attr("id");
+        $(this).addClass('hidden');
+        $.post("<?php echo C('HOME_PAGE') ?>teacher/index/msg_read", {'msg_id': id}, function() {
+
+        });
+    });
+});
+</script>
+</html>

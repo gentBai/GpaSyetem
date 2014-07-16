@@ -1,0 +1,58 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-sm-3 col-md-2 sidebar">
+    	<volist name="c_list" id="c_list">
+        	<div class="btn btn-lg btn-info sclass" id="{$c_list.c_id}">{$c_list.cr_name}</div>
+        </volist>
+    </div>
+    <div class="col-sm-8 col-sm-offset-3 main">
+        <div class="alert alert-success">
+            <div class="col-xs-6 col-md-4">成绩类型</div>
+            <div class="col-xs-6 col-md-4">设定比重</div>
+            <div class="col-xs-6 col-md-4">修改比重</div>
+        </div>
+        <form id="scores" action="<?php echo C('HOME_PAGE') ?>teacher/doEdit" method="post">
+        	<input class="hidden" id="c_id" name="c_id" value="{$c_id}">
+	        <volist name="sm_list" id="sm_list">
+		        <div class="alert alert-success">
+		            <div class="col-xs-6 col-md-4">{$sm_list.t_name}</div>
+		            <div class="col-xs-6 col-md-4">{$sm_list.percent}</div>
+		            <div class="col-xs-6 col-md-4">
+		            	<input type="text" id="{$sm_list.key}" name="{$sm_list.key}" style="width: 100%; text-align: center;" value="{$sm_list.percent}">
+		            	<input type="text" class="hidden" id="{$sm_list.old}" name="{$sm_list.old}" style="width: 100%; text-align: center;" value="{$sm_list.percent}">
+		            </div>
+		        </div>
+	        </volist>
+	        <div class="col-md-8">
+	        </div>
+	        <div class="col-md-4">
+	            <input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" value="提交">
+	        </div>
+       </form>
+    </div>
+</div>
+<script>
+
+$(document).ready(function() {
+	$('.sclass').click(function() {
+		var c_id = $(this).attr('id');
+		$.post('/teacher/updateClass/updateScoreMessage', {'c_id': c_id}, function(data) {
+			var res = JSON.parse(data);
+			var html_txt = '<input class="hidden" id="c_id" name="c_id" value="' + c_id + '">';
+			for(var index in res) {
+				html_txt += '<div class="alert alert-success">'
+		            + '<div class="col-xs-6 col-md-4">' + res[index]['t_name'] + '</div>'
+		            + '<div class="col-xs-6 col-md-4">' + res[index]['percent'] + '</div>'
+		            + '<div class="col-xs-6 col-md-4">'
+		           	+ '<input type="text" id="' + res[index]['key'] + '" name="' + res[index]['key'] + '" style="width: 100%; text-align: center;" value="' + res[index]['percent'] + '">'
+		           	+ '<input type="text" class="hidden" id="' + res[index]['old'] + '" name="' + res[index]['old'] + '" style="width: 100%; text-align: center;" value="' + res[index]['percent'] + '">'
+		            + '</div></div>';
+			}
+			html_txt += '<div class="col-md-8"></div><div class="col-md-4"><input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" value="提交"></div>';
+			$('#scores').html(html_txt);
+		});
+	});
+});
+
+</script>
+</body>

@@ -1,0 +1,26 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <a href="<?php echo C('HOME_PAGE'); ?>admin/add"><div class="btn btn-lg btn-info" title="时间">添加课程</div></a>
+        <a href="<?php echo C('HOME_PAGE'); ?>admin/addTeacher"><div class="btn btn-lg btn-info" title="时间">添加老师</div></a>
+        <a href="<?php echo C('HOME_PAGE'); ?>admin/addStudent"><div class="btn btn-lg btn-info" title="时间">添加学生</div></a>
+    </div>
+    <div class="col-sm-8 col-sm-offset-3 main">
+        <div class="alert alert-success">
+            <div class="col-xs-6 col-md-4">课程</div>
+            <div class="col-xs-6 col-md-4">教师</div>
+            <div class="col-xs-6 col-md-4">消息</div>
+        </div>
+        <volist name="msg_list" id="msg_list">
+            <a href="Admin/judgeEdit/{$msg_list.c_id}">
+                <div class="alert alert-success">
+                    <div class="col-xs-6 col-md-4">{$msg_list.cr_name}</div>
+                    <div class="col-xs-6 col-md-4">{$msg_list.tc_name}</div>
+                    <div class="col-xs-6 col-md-4">申请修改成绩比重</div>
+                </div>
+            </a>
+        </volist>
+    </div>
+</div>
+</body>
+</html>

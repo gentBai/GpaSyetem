@@ -1,0 +1,44 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"><h1>添加学生</h1></div>
+    <div class="col-md-1"></div>
+    <form action="<?php echo C('HOME_PAGE'); ?>Admin/AddStudent/addStudent" method="post">
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">学号</div>
+            <div class="col-md-9"><input type="text" name="s_user"></div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">姓名</div>
+            <div class="col-md-9"><input type="text" name="s_name"></div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">性别</div>
+            <div class="col-md-9">
+                <select name="s_sex">
+                    <option value="0">男</option>
+                    <option value="1">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">生日</div>
+            <div class="col-md-9"><input type="text" name="s_birthday"></div>
+        </div>
+        <div class="col-md-6 panel-heading">
+            <div class="col-md-3" style="text-align: right;">学院</div>
+            <div class="col-md-9">
+                <select name="s_aid">
+                    <volist name="a_list" id="a">
+                        <option value="{$a.a_id}">{$a.a_name}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12" style="text-align: center;">
+            <input type="submit" class="btn btn-success" style="width: auto;">
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>欢迎进入成绩管理系统</title>
+
+        <link href="<?php echo C('CSS_URL') ?>bootstrap-modal.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo C('CSS_URL') ?>joywindow.bootstrap.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>bootstrap.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>bootstrap-modalmanager.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>bootstrap-modal.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>modal.manager.plugin1.0.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>jshow.utils.js"></script>
+
+
+        <!-- you can delete follow resource 以下两个可删除-->
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>form.validate.js"></script>
+        <script type="text/javascript" src="<?php echo C('JS_URL') ?>jquery.ui.draggable.js"></script>
+
+        <link rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/typo.css/1.1/typo.min.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo C('CSS_URL') ?>bysj.css">
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-static-top" role="navigation" style=" position: fixed; width: 100%; ">
+            <div class="container">
+                <div class="navbar-header navbar-brand" style="width:240px;">
+                    <div class="col-md-6">{$name}</div>
+                    <if condition="($identify eq t)">
+                        <div class="col-md-6">老师</div>
+                    <else/>
+                        <div class="col-md-6">同学</div>
+                    </if>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="navbar-brand" href="<?php echo C('HOME_PAGE') ?>teacher/logout">注销</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>

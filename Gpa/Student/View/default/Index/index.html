@@ -1,0 +1,31 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 70px; ">
+    <div class="alert alert-success">
+		<div class="col-xs-6 col-md-4">课程</div>
+        <div class="col-xs-6 col-md-4" style="text-align: right;">总成绩</div>
+        <div class="col-xs-6 col-md-4"></div>
+    </div>
+    <form id="students" method="post">
+    	<input class="hidden" id="c_id" name="c_id" value="{$c_id}">
+        <volist name="c_list" id="c_list">
+	        <div class="alert alert-success">
+	        	<div class="col-xs-6 col-md-4">{$c_list.cr_name}</div>
+		        <div class="col-xs-6 col-md-4" style="text-align: right;">{$c_list.score}</div>
+		        <a href="javascript:void(0)" onclick="ques({$c_list.c_id})"><div class="col-xs-6 col-md-4">疑惑</div></a>
+	        </div>
+        </volist>
+   </form>
+</div>
+</body>
+<script>
+	function ques(c_id) {
+		$.post("<?php echo C('HOME_PAGE') ?>student/index/ques", {"c_id": c_id}, function(data) {
+			if(data['status'] == 1) {
+				alert('提醒成功');
+			} else if(data['status'] == 0) {
+				alert('请不要重复提醒');
+			}
+		});
+	}
+</script>
+</html>

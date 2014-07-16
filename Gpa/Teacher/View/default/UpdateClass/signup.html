@@ -1,0 +1,62 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="col-sm-3 col-md-2 sidebar">
+    	<volist name="c_list" id="c_list">
+        	<div class="btn btn-lg btn-info sclass" id="{$c_list.c_id}">{$c_list.cr_name}</div>
+        </volist>
+    </div>
+    <div class="col-sm-8 col-sm-offset-3 main">
+        <div class="alert alert-success">
+            <div class="col-xs-6 col-md-3">学号</div>
+            <div class="col-xs-6 col-md-3">姓名</div>
+        </div>
+        <form id="students" action="<?php echo C('HOME_PAGE') ?>teacher/doSignup" method="post">
+        	<input class="hidden" id="c_id" name="c_id" value="{$c_id}">
+	        <volist name="st_list" id="st_list">
+		        <div class="alert alert-success">
+		            <div class="col-xs-6 col-md-3">{$st_list.s_user}</div>
+		            <div class="col-xs-6 col-md-3">{$st_list.s_name}</div>
+		            <div class="col-xs-6 col-md-6">
+		            	<input class="hidden" id="st_list[{$st_list.s_id}]" name="st_list[{$st_list.s_id}]">
+		            	<div class="col-md-4" name="st_list[{$st_list.s_id}]"><a href="javascript:void(0)" class="arrive">已到</a></div>
+		            	<div class="col-md-4" name="st_list[{$st_list.s_id}]"><a href="javascript:void(0)" class="absent">未到</a></div>
+		            	<div class="col-md-4" name="st_list[{$st_list.s_id}]"><a href="javascript:void(0)" class="leave">请假</a></div>
+		            </div>
+		        </div>
+	        </volist>
+	        <div class="col-md-8">
+	        </div>
+	        <div class="col-md-4">
+	            <input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" value="提交">
+	        </div>
+	        <script type="text/javascript" src="<?php echo C('JS_URL') ?>signup.js"></script>
+       </form>
+    </div>
+</div>
+<script>
+
+$(document).ready(function() {
+	$('.sclass').click(function() {
+		var c_id = $(this).attr('id');
+		$.post('/teacher/updateClass/updateStudentList', {'c_id': c_id}, function(data) {
+			var res = JSON.parse(data);
+			var html_txt = '<input class="hidden" id="c_id" name="c_id" value="' + c_id + '">';
+			for(var index in res) {
+				html_txt += '<div class="alert alert-success"><div class="col-xs-6 col-md-4">'+res[index]['s_user']+'</div>'
+		            + '<div class="col-xs-6 col-md-4">'+res[index]['s_name']+'</div>'
+		            +'<div class="col-xs-6 col-md-4">'
+		            +'<input class="hidden" id="st_list[' + res[index]['s_id'] + ']" name="st_list[' + res[index]['s_id'] + ']">'
+		            +'<div class="col-md-4" name="st_list[' + res[index]['s_id'] + ']"><a href="javascript:void(0)" class="arrive">已到</a></div>'
+		            +'<div class="col-md-4" name="st_list[' + res[index]['s_id'] + ']"><a href="javascript:void(0)" class="absent">未到</a></div>'
+		            +'<div class="col-md-4" name="st_list[' + res[index]['s_id'] + ']"><a href="javascript:void(0)" class="leave">请假</a></div>'
+		            +'</div></div>';
+			}
+			html_txt += '<div class="col-md-8"></div><div class="col-md-4"><input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" value="提交"></div>';
+			html_txt += '<script type="text/javascript" src="<?php echo C('JS_URL') ?>signup.js">' + "</" + "script" + ">";
+			$('#students').html(html_txt);
+		});
+	});
+});
+
+</script>
+</body>

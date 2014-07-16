@@ -1,0 +1,30 @@
+<include file="Public/Html/header.html" />
+<div class="container" style=" padding-top: 50px; ">
+    <div class="alert alert-success">
+            <div class="col-xs-6 col-md-4">成绩类型</div>
+            <div class="col-xs-6 col-md-4">原始比重</div>
+            <div class="col-xs-6 col-md-4">修改比重</div>
+        </div>
+        <form action="<?php echo C('HOME_PAGE') ?>admin/editResult" method="post">
+            <input class="hidden" name="c_id" value="{$c_id}">
+            <volist name="msg_list" id="msg_list">
+                <div class="alert alert-success">
+                    <input class="hidden" name="{$msg_list.key}" id="{$msg_list.key}" value="{$msg_list.new_per}">
+                    <div class="col-xs-6 col-md-4">{$msg_list.t_name}</div>
+                    <div class="col-xs-6 col-md-4">{$msg_list.old_per}</div>
+                    <div class="col-xs-6 col-md-4">{$msg_list.new_per}</div>
+                </div>
+            </volist>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" name="submit" value="不通过">
+            </div>
+            <div class="col-md-4">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" style="color:#ffffff;" name="submit" value="通过">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
